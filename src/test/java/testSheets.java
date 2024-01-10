@@ -61,8 +61,8 @@ public class testSheets {
   }
 
   /**
-   * Prints the names and majors of students in a sample spreadsheet:
-   * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+   * The source spreadsheet:
+   * https://docs.google.com/spreadsheets/d/1iJxhyn-wvVuixv6FU0COu6otxyRwJhxZN6Dv1e7ZgNE/edit
    */
   public static Object[][] fetchDataFromSheet() throws IOException, GeneralSecurityException {
     // Build a new authorized API client service.
