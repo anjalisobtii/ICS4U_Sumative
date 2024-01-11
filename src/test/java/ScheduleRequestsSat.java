@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 public class ScheduleRequestsSat {
   public static void main(String[] args) {
     Loader.loadNativeLibraries();
-    final int numNurses = 5;
+    final int numNurses = 15;
     final int numDays = 7;
     final int numShifts = 3;
 
