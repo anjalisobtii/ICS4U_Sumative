@@ -6,6 +6,13 @@
   
   <dependencies>
 
+	  <dependencies>
+<!-- https://mvnrepository.com/artifact/com.google.ortools/ortools-java -->
+<dependency>
+    <groupId>com.google.ortools</groupId>
+    <artifactId>ortools-java</artifactId>
+    <version>9.8.3296</version>
+</dependency>
 
 		<dependency>
 			<groupId>com.google.api-client</groupId>
