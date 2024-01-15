@@ -18,8 +18,9 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 
-public class SheetsQuickstart {
+public class getSheets {
   private static final String APPLICATION_NAME = "Google Sheets API Java Quickstart";
   private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
   private static final String TOKENS_DIRECTORY_PATH = "tokens";
@@ -42,7 +43,7 @@ public class SheetsQuickstart {
   private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT)
       throws IOException {
     // Load client secrets.
-    InputStream in = SheetsQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+    InputStream in = getSheets.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
     if (in == null) {
       throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
     }
@@ -60,14 +61,14 @@ public class SheetsQuickstart {
   }
 
   /**
-   * Prints the names and majors of students in a sample spreadsheet:
-   * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+   * The source spreadsheet:
+   * https://docs.google.com/spreadsheets/d/1iJxhyn-wvVuixv6FU0COu6otxyRwJhxZN6Dv1e7ZgNE/edit
    */
-  public static void main(String... args) throws IOException, GeneralSecurityException {
+  public static ArrayList<Object[]> fetchDataFromSheet() throws IOException, GeneralSecurityException {
     // Build a new authorized API client service.
     final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-    final String spreadsheetId = "1iJxhyn-wvVuixv6FU0COu6otxyRwJhxZN6Dv1e7ZgNE"; //found in URL
-    final String range = "Sheet1!A2:C";
+    final String spreadsheetId = "11FQLdAR0R22_CqmHh95SmhKP_gH2xRJI7NShMXhHtTg"; //found in URL
+    final String range = "Sheet1!A:E";
     Sheets service =
         new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
             .setApplicationName(APPLICATION_NAME)
@@ -78,13 +79,16 @@ public class SheetsQuickstart {
         
     List<List<Object>> values = response.getValues();
     if (values == null || values.isEmpty()) {
-      System.out.println("No data found.");
+        System.out.println("No data found.");
+        return null; // Returning null as there's no data
     } else {
-      System.out.println("Name, Age, Height");
-      for (List row : values) {
-        // Print columns A, B and C, which correspond to indices 0, 1 and 2.
-        System.out.printf("%s, %s, %s\n", row.get(0), row.get(1), row.get(2));
-      }
+        ArrayList<Object[]> data = new ArrayList<>();
+        for (List<Object> row : values) {
+            // Create an array for each row and add it to the ArrayList
+            Object[] rowData = new Object[] { row.get(0), row.get(1), row.get(2), row.get(3), row.get(4) };
+            data.add(rowData);
+        }
+        return data;
     }
   }
 }
